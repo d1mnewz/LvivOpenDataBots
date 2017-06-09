@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
+using LvivOpenDataBots.Core.Data;
+using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
+using Utils = LvivOpenDataBots.Core.Infrastructure.Utils;
 
-namespace Education
+namespace Education.Controllers
 {
-    [BotAuthentication]
+    //   [BotAuthentication]
     public class MessagesController : ApiController
     {
         /// <summary>
@@ -22,11 +22,11 @@ namespace Education
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
+                KinderGartenReplyBuilder rb = new KinderGartenReplyBuilder();
 
-                // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
+                string replyText = rb.BuildReply(
+                    Utils.GetFirstMatch(Utils.DownloadJsonAsync(DataPacksApiUrls.EducationKinderGarten))); // TODO: write smart replyBuilder
+                Activity reply = activity.CreateReply(replyText);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
