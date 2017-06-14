@@ -1,24 +1,23 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using Newtonsoft.Json.Linq;
 
 namespace LvivOpenDataBots.Core.Infrastructure
 {
-    public class Utils
+    public static class Utils
     {
-        public static string DownloadJsonAsync(string url)
+        public static string DownloadJson(string url)
         {
             WebClient client = new WebClient();
             return client.DownloadString(url);
         }
 
-        public static dynamic GetFirstMatch(string json) // to do
+        public static List<T> GetRecords<T>(string json) // works in simple consoleapp from scratch, but doesn't work here
         {
-            dynamic res = JObject.Parse(json);
-            if (res.success == true && res.result.total > 0)
-            {
-                return res.result.records[0];
-            }
-            return null;
+            JObject res = JObject.Parse(json);
+            JArray jArray = (JArray)res["result"]["records"];
+            var result = jArray.ToObject<List<T>>();
+            return result;
         }
     }
 }

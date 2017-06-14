@@ -1,8 +1,8 @@
 ﻿namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
 {
-    public interface IReplyBuilder
+    public interface IReplyBuilder<in T>
     {
-        string BuildReply(dynamic entity);
+        string BuildReply(T entity);
 
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LvivOpenDataBots.Core.Data;
+using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
 using Microsoft.Bot.Connector;
 using Utils = LvivOpenDataBots.Core.Infrastructure.Utils;
@@ -25,7 +27,11 @@ namespace Education.Controllers
                 KinderGartenReplyBuilder rb = new KinderGartenReplyBuilder();
 
                 string replyText = rb.BuildReply(
-                    Utils.GetFirstMatch(Utils.DownloadJsonAsync(DataPacksApiUrls.EducationKinderGarten))); // TODO: write smart replyBuilder
+                                 Utils.GetRecords<KinderGarten>(
+                                 Utils.DownloadJson(DataPacksApiUrls.EducationKinderGarten)
+                                 )
+                                 .First()
+                             );
                 Activity reply = activity.CreateReply(replyText);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }

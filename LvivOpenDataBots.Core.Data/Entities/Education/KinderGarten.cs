@@ -1,43 +1,40 @@
 ﻿// ReSharper disable InconsistentNaming
+using Newtonsoft.Json;
 
-using System.Runtime.Serialization;
-
-namespace LvivOpenDataBots.Core.Data.Entities
+namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    [DataContract]
-    public class KinderGarten : Record
+    public class KinderGarten
     {
+        [JsonProperty("_id")]
         public int _id { get; set; }
+        [JsonProperty("Name")]
         public string Name { get; set; }
+        [JsonProperty("Phone_number")]
         public string Phone_number { get; set; }
+        [JsonProperty("Post_code")]
         public string Post_code { get; set; }
-
+        [JsonProperty("Street_name")]
         public string Street_name { get; set; }
+        [JsonProperty("Building_number")]
         public string Building_number { get; set; }
-
-
-
+        [JsonProperty("Holder")]
         public string Holder { get; set; }
 
-
         // may need renaming after Bogdan change names in API
-        [DataMember(Name = "E-mail")]
+        [JsonProperty("E-mail")]
         public string Email { get; set; }
 
-        [DataMember(Name = "Coordinates_(longitude)")]
+        [JsonProperty("Coordinates_(longitude)")]
         public string Coordinates_longitude { get; set; }
 
-        [DataMember(Name = "Coordinates_(latitude)")]
+        [JsonProperty("Coordinates_(latitude)")]
         public string Coordinates_latitude { get; set; }
 
-        [DataMember(Name = "Web-site")]
+        [JsonProperty("Web-site")]
         public string Website { get; set; }
     }
 
-    public abstract class Record
-    {
-    }
 }
 
 
