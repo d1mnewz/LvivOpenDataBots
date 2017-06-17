@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReplyBuilders\IReplyBuilder.cs" />
-    <Compile Include="ReplyBuilders\KinderGartenReplyBuilder.cs" />
+    <Compile Include="ReplyBuilders\ReplyBuilder.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

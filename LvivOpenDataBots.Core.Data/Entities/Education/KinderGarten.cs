@@ -4,12 +4,10 @@ using Newtonsoft.Json;
 namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class KinderGarten
+    public class KinderGarten : BaseEntity
     {
         [JsonProperty("_id")]
         public int _id { get; set; }
-        [JsonProperty("Name")]
-        public string Name { get; set; }
         [JsonProperty("Phone_number")]
         public string Phone_number { get; set; }
         [JsonProperty("Post_code")]

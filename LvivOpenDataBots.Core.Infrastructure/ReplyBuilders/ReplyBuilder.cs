@@ -1,17 +1,17 @@
 using System.Text;
 using JetBrains.Annotations;
+using LvivOpenDataBots.Core.Data.Entities;
 using LvivOpenDataBots.Core.Data.Entities.Education;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
 {
-    public class ReplyBuilder<T> where T : class // we can create BaseEntity class with Name and Address field (or similar)
+    public class ReplyBuilder<T> where T : BaseEntity
     {
         public string BuildReply([NotNull] T entity)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Ось що ми знайшли за цим запитом:");
 
-            // suggesting that each entity is inherited from BaseEntity
             if (entity.Name != null)
             {
                 sb.Append(entity.Name);
@@ -22,7 +22,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
             switch (typeof(T).ToString())
             {
                 case "Kindergarten":
-                    KinderGarten kindergarten = entity as Kindergarten;
+                    KinderGarten kindergarten = entity as KinderGarten;
 
                     if (kindergarten.Street_name != null)
                     {

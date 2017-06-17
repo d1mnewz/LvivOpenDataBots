@@ -24,7 +24,7 @@ namespace Education.Controllers
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                KinderGartenReplyBuilder rb = new KinderGartenReplyBuilder();
+                var rb = new ReplyBuilder<KinderGarten>();
 
                 string replyText = rb.BuildReply(
                                  Utils.GetRecords<KinderGarten>(
