@@ -18,10 +18,9 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
                 sb.Append(", ");
             }
 
-            // insert here new models
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name)
             {
-                case "Kindergarten":
+                case "KinderGarten":
                     KinderGarten kindergarten = entity as KinderGarten;
 
                     if (kindergarten.Street_name != null)
