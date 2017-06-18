@@ -4,11 +4,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using LvivOpenDataBots.Core.Data;
 using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
 using Microsoft.Bot.Connector;
-using Utils = LvivOpenDataBots.Core.Infrastructure.Utils;
+using static LvivOpenDataBots.Core.Data.DataPacks.EducationDataPacksApiUrls;
+using static LvivOpenDataBots.Core.Infrastructure.Utils;
 
 namespace Education.Controllers
 {
@@ -23,53 +23,16 @@ namespace Education.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                 var rb = new ReplyBuilder<KinderGarten>();
 
                 string replyText = rb.BuildReply(
-                                 Utils.GetRecords<KinderGarten>(
-                                 Utils.DownloadJson(DataPacksApiUrls.EducationKinderGarten)
-                                 )
-                                 .First()
-                             );
+                    GetRecords<KinderGarten>(DownloadJson(KinderGartens)).First());
                 Activity reply = activity.CreateReply(replyText);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
-            else
-            {
-                HandleSystemMessage(activity);
-            }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
-        }
-
-        private Activity HandleSystemMessage(Activity message)
-        {
-            if (message.Type == ActivityTypes.DeleteUserData)
-            {
-                // Implement user deletion here
-                // If we handle user deletion, return a real message
-            }
-            else if (message.Type == ActivityTypes.ConversationUpdate)
-            {
-                // Handle conversation state changes, like members being added and removed
-                // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
-                // Not available in all channels
-            }
-            else if (message.Type == ActivityTypes.ContactRelationUpdate)
-            {
-                // Handle add/remove from contact lists
-                // Activity.From + Activity.Action represent what happened
-            }
-            else if (message.Type == ActivityTypes.Typing)
-            {
-                // Handle knowing tha the user is typing
-            }
-            else if (message.Type == ActivityTypes.Ping)
-            {
-            }
-
-            return null;
         }
     }
 }

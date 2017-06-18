@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataPacksApiUrls.cs" />
+    <Compile Include="DataPacks\EducationDataPacksApiUrls.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Education\KinderGarten.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
