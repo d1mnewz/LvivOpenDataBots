@@ -23,15 +23,15 @@ namespace Education.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                var connector = new ConnectorClient(new Uri(uriString: activity.ServiceUrl));
                 var rb = new ReplyBuilder<University>();
 
                 string replyText = rb.BuildReply(
-                    GetRecords<University>(DownloadJson(Universities)).First());
-                Activity reply = activity.CreateReply(replyText);
-                await connector.Conversations.ReplyToActivityAsync(reply);
+                    GetRecords<University>(DownloadJson(url: Universities)).First());
+                Activity reply = activity.CreateReply(text: replyText);
+                await connector.Conversations.ReplyToActivityAsync(activity: reply);
             }
-            var response = Request.CreateResponse(HttpStatusCode.OK);
+            var response = Request.CreateResponse(statusCode: HttpStatusCode.OK);
             return response;
         }
     }
