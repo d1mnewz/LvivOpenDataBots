@@ -12,28 +12,29 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Ось що ми знайшли за цим запитом:");
 
-            if (entity.Name != null)
-            {
-                sb.Append(entity.Name);
-                sb.Append(", ");
-            }
+
 
             switch (typeof(T).Name)
             {
                 case "KinderGarten":
                     KinderGarten kindergarten = entity as KinderGarten;
 
-                    if (kindergarten.Street_name != null)
+                    if (kindergarten.Name != null)
                     {
-                        sb.Append(kindergarten.Street_name);
+                        sb.Append(kindergarten.Name);
+                        sb.Append(", ");
+                    }
+                    if (kindergarten.StreetName != null)
+                    {
+                        sb.Append(kindergarten.StreetName);
                         sb.Append(", ");
                     }
 
-                    if (kindergarten.Building_number != null)
+                    if (kindergarten.BuildingNumber != null)
                     {
-                        if (kindergarten.Building_number.EndsWith(@".0"))
-                            kindergarten.Building_number = kindergarten.Building_number.Replace(".0", "");
-                        sb.Append(kindergarten.Building_number);
+                        if (kindergarten.BuildingNumber.EndsWith(@".0"))
+                            kindergarten.BuildingNumber = kindergarten.BuildingNumber.Replace(".0", "");
+                        sb.Append(kindergarten.BuildingNumber);
                         sb.Append(", ");
                     }
 

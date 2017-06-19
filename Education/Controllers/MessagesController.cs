@@ -24,10 +24,10 @@ namespace Education.Controllers
             if (activity.Type == ActivityTypes.Message)
             {
                 var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                var rb = new ReplyBuilder<KinderGarten>();
+                var rb = new ReplyBuilder<University>();
 
                 string replyText = rb.BuildReply(
-                    GetRecords<KinderGarten>(DownloadJson(KinderGartens)).First());
+                    GetRecords<University>(DownloadJson(Universities)).First());
                 Activity reply = activity.CreateReply(replyText);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }

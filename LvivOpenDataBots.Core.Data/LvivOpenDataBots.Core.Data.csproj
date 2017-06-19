@@ -46,7 +46,12 @@
   <ItemGroup>
     <Compile Include="DataPacks\EducationDataPacksApiUrls.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Education\Gymnasium.cs" />
     <Compile Include="Entities\Education\KinderGarten.cs" />
+    <Compile Include="Entities\Education\PreSchool.cs" />
+    <Compile Include="Entities\Education\School.cs" />
+    <Compile Include="Entities\Education\TechLyceum.cs" />
+    <Compile Include="Entities\Education\University.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

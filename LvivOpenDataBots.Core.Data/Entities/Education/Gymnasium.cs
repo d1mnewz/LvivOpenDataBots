@@ -1,10 +1,8 @@
-﻿// ReSharper disable InconsistentNaming
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class KinderGarten : BaseEntity
+    public class Gymnasium : BaseEntity
     {
         [JsonProperty("Name")]
         public string Name { get; set; }
@@ -34,19 +32,4 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
     }
 }
 
-
-
-
-//URL: http://opendata.city-adm.lviv.ua/dataset/shkola-sadol/resource/92ac88b2-f4cf-46ac-a8b8-64600c1ec23a
-
-//Структура набору даних:
-//    'Name' - назва школи-садку;
-//    'Street_name' - назва вулиці;
-//    'Building_number' - номер будинку;
-//    'Post_code' - поштовий індекс;
-//    'Phone_number' - номер телефону;
-//    'E-mail' - електронна пошта;
-//    'Web-site' - веб-сайт;
-//    'Holder' - кому підпорядковується;
-//    'Coordinates_(longitude)' - координати(довгота);
-//    'Coordinates_(latitude)' - координати(широта).
+// URL: http://opendata.city-adm.lviv.ua/dataset/himnazii/resource/0163f851-2cd3-43d0-ad6d-ce6a90d23614

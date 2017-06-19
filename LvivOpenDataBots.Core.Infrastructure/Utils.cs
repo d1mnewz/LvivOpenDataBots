@@ -12,7 +12,7 @@ namespace LvivOpenDataBots.Core.Infrastructure
             return client.DownloadString(url);
         }
 
-        public static List<T> GetRecords<T>(string json) // works in simple consoleapp from scratch, but doesn't work here
+        public static List<T> GetRecords<T>(string json)
         {
             JObject res = JObject.Parse(json);
             JArray jArray = (JArray)res["result"]["records"];
