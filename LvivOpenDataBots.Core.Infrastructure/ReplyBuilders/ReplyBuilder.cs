@@ -12,31 +12,44 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
         public string BuildReply(List<string> intents)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Ось що ми знайшли за цим запитом:");
-
-            if (intents.Contains("kindergarten"))
+            var startReply = "Ось що ми знайшли за цим запитом:";
+            sb.AppendLine(startReply);
+            if (intents.Count > 0)
             {
-                var records = GetRecords<KinderGarten>(DownloadJson(KinderGartens));
-
-                // some analytics about how to define the entity we need
-                var result = records.First(); // TODO
-
-
-                sb.Append($"{result.Name}");
-
-                if (intents.Contains("phone"))
+                if (intents.Contains("kindergarten"))
                 {
-                    sb.Append(", ");
-                    sb.Append($"тел. {result.PhoneNumber}");
+                    var records = GetRecords<KinderGarten>(DownloadJson(KinderGartens));
+
+                    var result = records.First(); // TODO: some analytics about how to define the entity we need
+
+
+                    sb.Append($"{result.Name}");
+
+                    if (intents.Contains("phone"))
+                    {
+                        sb.Append(", ");
+                        sb.Append($"тел. {result.PhoneNumber}");
+                    }
+                    if (intents.Contains("address"))
+                    {
+                        sb.Append(", ");
+                        sb.Append($"{result.StreetName}, {result.BuildingNumber}");
+                    }
+                }
+
+                else if (intents.Contains("university"))
+                {
+                    return "TO BE IMPLEMENTED";
                 }
             }
+            var res = sb.ToString();
+            var res2 = sb.ToString().Equals(startReply);
+            var res3 = sb.ToString() == startReply;
+            var fu = string.Concat(startReply, "\r\n");
+            if (sb.ToString() == fu)
+                return "Спробуйте сформувати своє питання по-іншому :)";
+            else return sb.ToString();
 
-            else if (intents.Contains("university"))
-            {
-                return "univ";
-            }
-
-            return sb.ToString();
         }
     }
 }
