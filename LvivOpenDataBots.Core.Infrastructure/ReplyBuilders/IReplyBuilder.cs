@@ -1,8 +1,10 @@
-﻿namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
+﻿using System.Collections.Generic;
+
+namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
 {
-    public interface IReplyBuilder<in T>
+    public interface IReplyBuilder
     {
-        string BuildReply(T entity);
+        string BuildReply(List<string> intents);
 
     }
 }

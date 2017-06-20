@@ -1,46 +1,39 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using JetBrains.Annotations;
-using LvivOpenDataBots.Core.Data.Entities;
 using LvivOpenDataBots.Core.Data.Entities.Education;
+using static LvivOpenDataBots.Core.Data.DataPacks.EducationDataPacksApiUrls;
+using static LvivOpenDataBots.Core.Infrastructure.Utils;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
 {
-    public class ReplyBuilder<T> where T : BaseEntity
+    public class ReplyBuilder : IReplyBuilder
     {
-        public string BuildReply([NotNull] T entity)
+        public string BuildReply(List<string> intents)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Ось що ми знайшли за цим запитом:");
 
-
-
-            switch (typeof(T).Name)
+            if (intents.Contains("kindergarten"))
             {
-                case "KinderGarten":
-                    KinderGarten kindergarten = entity as KinderGarten;
+                var records = GetRecords<KinderGarten>(DownloadJson(KinderGartens));
 
-                    if (kindergarten.Name != null)
-                    {
-                        sb.Append(kindergarten.Name);
-                        sb.Append(", ");
-                    }
-                    if (kindergarten.StreetName != null)
-                    {
-                        sb.Append(kindergarten.StreetName);
-                        sb.Append(", ");
-                    }
+                // some analytics about how to define the entity we need
+                var result = records.First(); // TODO
 
-                    if (kindergarten.BuildingNumber != null)
-                    {
-                        if (kindergarten.BuildingNumber.EndsWith(@".0"))
-                            kindergarten.BuildingNumber = kindergarten.BuildingNumber.Replace(".0", "");
-                        sb.Append(kindergarten.BuildingNumber);
-                        sb.Append(", ");
-                    }
 
-                    break;
+                sb.Append($"{result.Name}");
 
-                default: break;
+                if (intents.Contains("phone"))
+                {
+                    sb.Append(", ");
+                    sb.Append($"тел. {result.PhoneNumber}");
+                }
+            }
+
+            else if (intents.Contains("university"))
+            {
+                return "univ";
             }
 
             return sb.ToString();
