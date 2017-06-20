@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LvivOpenDataBots.Core.Data.Entities.Education;
+using static System.String;
 using static LvivOpenDataBots.Core.Data.DataPacks.EducationDataPacksApiUrls;
 using static LvivOpenDataBots.Core.Infrastructure.Utils;
 
@@ -18,37 +19,50 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
             {
                 if (intents.Contains("kindergarten"))
                 {
-                    var records = GetRecords<KinderGarten>(DownloadJson(KinderGartens));
+                    var records = GetRecords<KinderGarten>(DownloadJson<KinderGarten>());
 
                     var result = records.First(); // TODO: some analytics about how to define the entity we need
 
 
                     sb.Append($"{result.Name}");
 
-                    if (intents.Contains("phone"))
+                    if (intents.Contains("phone") && result.PhoneNumber != null)
                     {
                         sb.Append(", ");
                         sb.Append($"тел. {result.PhoneNumber}");
                     }
-                    if (intents.Contains("address"))
+                    if (intents.Contains("address") && !IsNullOrWhiteSpace(result.StreetName) &&
+                        !IsNullOrWhiteSpace(result.BuildingNumber))
                     {
                         sb.Append(", ");
                         sb.Append($"{result.StreetName}, {result.BuildingNumber}");
+
                     }
                 }
-
                 else if (intents.Contains("university"))
                 {
                     return "TO BE IMPLEMENTED";
                 }
+                else if (intents.Contains("school"))
+                {
+                    return "TO BE IMPLEMENTED";
+                }
+                else if (intents.Contains("techlyceum"))
+                {
+                    return "TO BE IMPLEMENTED";
+                }
+                else if (intents.Contains("preschool"))
+                {
+                    return "TO BE IMPLEMENTED";
+                }
+                else if (intents.Contains("gymnasium"))
+                {
+                    return "TO BE IMPLEMENTED";
+                }
+
             }
-            var res = sb.ToString();
-            var res2 = sb.ToString().Equals(startReply);
-            var res3 = sb.ToString() == startReply;
-            var fu = string.Concat(startReply, "\r\n");
-            if (sb.ToString() == fu)
-                return "Спробуйте сформувати своє питання по-іншому :)";
-            else return sb.ToString();
+
+            return sb.ToString() == Concat(startReply, "\r\n") ? "Спробуйте сформувати своє питання по-іншому :)" : sb.ToString();
 
         }
     }
