@@ -2,10 +2,11 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Web.Http;
-using LvivOpenDataBots.Core.Infrastructure;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
 using Microsoft.Bot.Connector;
+using static LvivOpenDataBots.Core.Infrastructure.Utils.TextAnalysis;
 
 namespace Education.Controllers
 {
@@ -21,11 +22,22 @@ namespace Education.Controllers
             if (activity.Type == ActivityTypes.Message)
             {
                 var connector = new ConnectorClient(new Uri(uriString: activity.ServiceUrl));
-                var rb = new ReplyBuilder();
-
-                string replyText = rb.BuildReply(Utils.GetIntentsList(activity));
-
+                var intents = GetIntentsList(activity: activity, aiKey: WebConfigurationManager.AppSettings["AiKey"]);
+                var replyText = "";
                 Activity reply = activity.CreateReply(text: replyText);
+                //if (intents.Contains("help")) // how to implement scoping without local storage?
+                //{
+                //    reply.Attachments = new List<Attachment> {
+                //        Utils.CreateHeroCardForEducation().ToAttachment()
+                //    };
+                //}
+                //else
+                //{
+                var rb = new ReplyBuilderFabric();
+                replyText = rb.GetBuilder(intents, activity.Text).BuildReply(intents, message: activity.Text);
+                //}
+                reply = activity.CreateReply(text: replyText);
+
                 await connector.Conversations.ReplyToActivityAsync(activity: reply);
             }
             var response = Request.CreateResponse(statusCode: HttpStatusCode.OK);

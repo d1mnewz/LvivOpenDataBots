@@ -7,7 +7,7 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
         [JsonProperty("Телефон")]
         public string Phone { get; set; }
         [JsonProperty("Назва")]
-        public string Name { get; set; }
+        public override string Name { get; set; }
         [JsonProperty("Електронна адреса")]
         public string Email { get; set; }
         [JsonProperty("Поштова адреса")]
