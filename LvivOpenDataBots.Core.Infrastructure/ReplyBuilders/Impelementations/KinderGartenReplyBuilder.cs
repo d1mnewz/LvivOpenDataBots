@@ -22,6 +22,8 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
 
             // TODO:build reply itself + checks for nulls
 
+            if (result == null)
+                return "На жаль, ми не знайшли ніякої школи-садка за цим запитом :(";
             return result.Name;
         }
     }

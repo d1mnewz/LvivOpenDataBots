@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.Extensions;
@@ -24,6 +24,8 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
 
             // TODO:build reply itself + checks for nulls
 
+            if (result == null)
+                return "На жаль, ми не знайшли ніякого університету за цим запитом :(";
             return result.Name;
         }
 
