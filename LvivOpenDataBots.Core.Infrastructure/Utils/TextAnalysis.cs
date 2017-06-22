@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using com.valgut.libs.bots.Wit;
+using JetBrains.Annotations;
 using LvivOpenDataBots.Core.Data.Entities;
 using LvivOpenDataBots.Core.Infrastructure.Extensions;
 using Microsoft.Bot.Connector;
@@ -24,39 +25,23 @@ namespace LvivOpenDataBots.Core.Infrastructure.Utils
                 return new List<string>();
             }
         }
-        public static T DefineMatchingEntity<T>(string message, IList<T> records) where T : BaseEntity
+
+        [CanBeNull]
+        public static T DefineMatchingEntity<T>(string message, IList<T> records) where T : BaseEntity // maybe i need some not-allowed keywords? like kindergarten that will be ignored
         {
-            switch (typeof(T).Name) // TODO:can i make it generic?
+            // remove key-words from message to parse
+            var names = records.Select(x => x.Name);
+            foreach (var name in names)
             {
-                case "KinderGarten":
+                var splitedMessage = message.ToWords();
+                foreach (var wordOfMessage in splitedMessage)
                 {
-                    var names = records.Select(x => x.Name);
-                    foreach (string name in names)
+                    var result = name.GetFirstMatchAndSourceBack(wordOfMessage, StringComparison.OrdinalIgnoreCase);
+                    if (result.source != null && result.word != null)
                     {
-                        var splitedMessage = message.ToWords();
-                        foreach (var wordOfMessage in splitedMessage)
-                        {
-                            var result = name.GetFirstMatchAndSourceBack(wordOfMessage, StringComparison.OrdinalIgnoreCase);
-                            if (result.source != null && result.word != null)
-                            {
-                                return records.First(x => x.Name == result.source);
-                            }
-                        }
+                        return records.First(x => x.Name == result.source);
                     }
-
                 }
-                    break;
-
-                //case "University":
-                //
-                //case "School":
-                //
-                //case "PreSchool":
-                //
-                //case "TechLyceum":
-                //
-                //case "Gymnasium":
-                //
             }
             return null;
         }

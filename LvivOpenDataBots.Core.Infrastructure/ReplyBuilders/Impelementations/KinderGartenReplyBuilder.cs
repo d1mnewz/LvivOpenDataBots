@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using LvivOpenDataBots.Core.Data.Entities.Education;
-using LvivOpenDataBots.Core.Infrastructure.Utils;
+using static LvivOpenDataBots.Core.Infrastructure.Utils.TextAnalysis;
 using static LvivOpenDataBots.Core.Infrastructure.Utils.WebJsonUtils;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
@@ -9,13 +9,13 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
     {
         public string BuildReply(List<string> intents, string message)
         {
-            var result = TextAnalysis.DefineMatchingEntity(
+            var result = DefineMatchingEntity(
                 message,
                 GetRecords<KinderGarten>(
                     DownloadJson<KinderGarten>()
                     ));
 
-           // TODO:build reply itself
+            // TODO:build reply itself + checks for nulls
 
             return result.Name;
         }

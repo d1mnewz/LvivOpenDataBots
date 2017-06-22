@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using LvivOpenDataBots.Core.Data.Entities.Education;
+using static LvivOpenDataBots.Core.Infrastructure.Utils.TextAnalysis;
+using static LvivOpenDataBots.Core.Infrastructure.Utils.WebJsonUtils;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
 {
@@ -6,7 +9,15 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
     {
         public string BuildReply(List<string> intents, string message)
         {
-            throw new System.NotImplementedException();
+            var result = DefineMatchingEntity(
+                message,
+                GetRecords<TechLyceum>(
+                    DownloadJson<TechLyceum>()
+                ));
+
+            // TODO:build reply itself + checks for nulls
+
+            return result.Name;
         }
     }
 }

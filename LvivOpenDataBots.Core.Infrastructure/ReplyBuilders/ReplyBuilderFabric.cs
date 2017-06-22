@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
 {
     public class ReplyBuilderFabric
     {
+        [CanBeNull]
         public IReplyBuilder GetBuilder(List<string> intents, string message)
         {
-            if (intents.Count <= 0)
+            if (intents.Count == 0)
                 return null;
-
             if (intents.Contains("kindergarten"))
             {
                 return new KinderGartenReplyBuilder();

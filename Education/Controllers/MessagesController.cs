@@ -25,6 +25,8 @@ namespace Education.Controllers
                 var intents = GetIntentsList(activity: activity, aiKey: WebConfigurationManager.AppSettings["AiKey"]);
                 var replyText = "";
                 Activity reply = activity.CreateReply(text: replyText);
+
+                #region HelpHeroCard
                 //if (intents.Contains("help")) // how to implement scoping without local storage?
                 //{
                 //    reply.Attachments = new List<Attachment> {
@@ -33,9 +35,12 @@ namespace Education.Controllers
                 //}
                 //else
                 //{
-                var rb = new ReplyBuilderFabric();
-                replyText = rb.GetBuilder(intents, activity.Text).BuildReply(intents, message: activity.Text);
-                //}
+                #endregion
+
+                var rbFabric = new ReplyBuilderFabric();
+
+                replyText = rbFabric.GetBuilder(intents, activity.Text).BuildReply(intents, message: activity.Text);
+
                 reply = activity.CreateReply(text: replyText);
 
                 await connector.Conversations.ReplyToActivityAsync(activity: reply);

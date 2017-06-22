@@ -1,9 +1,7 @@
-﻿// ReSharper disable InconsistentNaming
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class KinderGarten : BaseEntity
     {
         [JsonProperty("Name")]
