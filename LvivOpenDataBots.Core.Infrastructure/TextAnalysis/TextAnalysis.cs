@@ -7,10 +7,11 @@ using LvivOpenDataBots.Core.Data.Entities;
 using LvivOpenDataBots.Core.Infrastructure.Extensions;
 using Microsoft.Bot.Connector;
 
-namespace LvivOpenDataBots.Core.Infrastructure.Utils
+namespace LvivOpenDataBots.Core.Infrastructure.TextAnalysis
 {
     public static class TextAnalysis
     {
+        [NotNull]
         public static List<string> GetIntentsList(Activity activity, string aiKey)
         {
             var wit = new WitClient(aiKey);
@@ -18,6 +19,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.Utils
 
             try
             {
+                // ReSharper disable once AssignNullToNotNullAttribute
                 return msg?.entities["intent"].Select(x => x.value.ToString()).ToList();
             }
             catch (KeyNotFoundException)
@@ -27,13 +29,12 @@ namespace LvivOpenDataBots.Core.Infrastructure.Utils
         }
 
         [CanBeNull]
-        public static T DefineMatchingEntity<T>(string message, IList<T> records) where T : BaseEntity // maybe i need some not-allowed keywords? like kindergarten that will be ignored
+        public static T DefineMatchingEntity<T>(IList<string> splitedMessage, IList<T> records) where T : BaseEntity
         {
-            // remove key-words from message to parse
+
             var names = records.Select(x => x.Name);
             foreach (var name in names)
             {
-                var splitedMessage = message.ToWords();
                 foreach (var wordOfMessage in splitedMessage)
                 {
                     var result = name.GetFirstMatchAndSourceBack(wordOfMessage, StringComparison.OrdinalIgnoreCase);

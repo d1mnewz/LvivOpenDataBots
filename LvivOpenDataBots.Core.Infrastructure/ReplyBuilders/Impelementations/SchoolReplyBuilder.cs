@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using LvivOpenDataBots.Core.Data.Entities.Education;
-using static LvivOpenDataBots.Core.Infrastructure.Utils.TextAnalysis;
+using LvivOpenDataBots.Core.Infrastructure.Extensions;
+using LvivOpenDataBots.Core.Infrastructure.TextAnalysis;
+using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.TextAnalysis;
 using static LvivOpenDataBots.Core.Infrastructure.Utils.WebJsonUtils;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
@@ -9,8 +12,10 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
     {
         public string BuildReply(List<string> intents, string message)
         {
+            var lowerWordedMessage = message.ToLowerInvariant().ToWords()
+                .Except(EducationKeyWords.School.synonims).ToList();
             var result = DefineMatchingEntity(
-                message,
+                lowerWordedMessage,
                 GetRecords<School>(
                     DownloadJson<School>()
                 ));

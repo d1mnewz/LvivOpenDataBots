@@ -7,7 +7,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
     public class ReplyBuilderFabric
     {
         [CanBeNull]
-        public IReplyBuilder GetBuilder(List<string> intents, string message)
+        public IReplyBuilder GetBuilder(List<string> intents)
         {
             if (intents.Count == 0)
                 return null;
@@ -15,13 +15,13 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
             {
                 return new KinderGartenReplyBuilder();
             }
+            if (intents.Contains("gymnasium"))
+            {
+                return new GymnasiumReplyBuilder();
+            }
             if (intents.Contains("university"))
             {
                 return new UniversityReplyBuilder();
-            }
-            if (intents.Contains("school"))
-            {
-                return new SchoolReplyBuilder();
             }
             if (intents.Contains("techlyceum"))
             {
@@ -31,10 +31,11 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
             {
                 return new PreSchoolReplyBuilder();
             }
-            if (intents.Contains("gymnasium"))
+            if (intents.Contains("school"))
             {
-                return new GymnasiumReplyBuilder();
+                return new SchoolReplyBuilder();
             }
+
             return null;
 
         }

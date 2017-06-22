@@ -6,7 +6,7 @@ using System.Web.Configuration;
 using System.Web.Http;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
 using Microsoft.Bot.Connector;
-using static LvivOpenDataBots.Core.Infrastructure.Utils.TextAnalysis;
+using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.TextAnalysis;
 
 namespace Education.Controllers
 {
@@ -23,7 +23,7 @@ namespace Education.Controllers
             {
                 var connector = new ConnectorClient(new Uri(uriString: activity.ServiceUrl));
                 var intents = GetIntentsList(activity: activity, aiKey: WebConfigurationManager.AppSettings["AiKey"]);
-                var replyText = "";
+                var replyText = "На жаль, ми нічого не знайшли за цим запитом :(";
                 Activity reply = activity.CreateReply(text: replyText);
 
                 #region HelpHeroCard
@@ -37,12 +37,13 @@ namespace Education.Controllers
                 //{
                 #endregion
 
-                var rbFabric = new ReplyBuilderFabric();
+                if (intents.Count > 0)
+                {
+                    var rbFabric = new ReplyBuilderFabric();
 
-                replyText = rbFabric.GetBuilder(intents, activity.Text).BuildReply(intents, message: activity.Text);
-
-                reply = activity.CreateReply(text: replyText);
-
+                    replyText = rbFabric.GetBuilder(intents).BuildReply(intents: intents, message: activity.Text);
+                    reply = activity.CreateReply(text: replyText);
+                }
                 await connector.Conversations.ReplyToActivityAsync(activity: reply);
             }
             var response = Request.CreateResponse(statusCode: HttpStatusCode.OK);

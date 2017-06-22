@@ -97,7 +97,9 @@
     <Compile Include="ReplyBuilders\Impelementations\SchoolReplyBuilder.cs" />
     <Compile Include="ReplyBuilders\Impelementations\TechLyceumReplyBuilder.cs" />
     <Compile Include="ReplyBuilders\Impelementations\UniversityReplyBuilder.cs" />
-    <Compile Include="Utils\TextAnalysis.cs" />
+    <Compile Include="TextAnalysis\EducationKeyWords.cs" />
+    <Compile Include="TextAnalysis\TextAnalysis.cs" />
+    <Compile Include="TextAnalysis\WordsToSkip.cs" />
     <Compile Include="Utils\BotFrameworkUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\WebJsonUtils.cs" />
