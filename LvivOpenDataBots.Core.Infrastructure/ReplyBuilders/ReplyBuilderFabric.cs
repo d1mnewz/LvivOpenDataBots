@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using LvivOpenDataBots.Core.Data.Entities.Education;
+using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Contract;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
@@ -13,27 +15,27 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
                 return null;
             if (intents.Contains("kindergarten"))
             {
-                return new KinderGartenReplyBuilder();
+                return new ReplyBuilder<KinderGarten>();
             }
             if (intents.Contains("gymnasium"))
             {
-                return new GymnasiumReplyBuilder();
+                return new ReplyBuilder<Gymnasium>();
             }
             if (intents.Contains("university"))
             {
-                return new UniversityReplyBuilder();
+                return new ReplyBuilder<University>();
             }
             if (intents.Contains("techlyceum"))
             {
-                return new TechLyceumReplyBuilder();
+                return new ReplyBuilder<TechLyceum>();
             }
             if (intents.Contains("preschool"))
             {
-                return new PreSchoolReplyBuilder();
+                return new ReplyBuilder<PreSchool>();
             }
             if (intents.Contains("school"))
             {
-                return new SchoolReplyBuilder();
+                return new ReplyBuilder<School>();
             }
 
             return null;

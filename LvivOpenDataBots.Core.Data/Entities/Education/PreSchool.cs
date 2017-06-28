@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
@@ -7,7 +7,11 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
         [JsonProperty("Name")]
         public override string Name { get; set; }
         [JsonProperty("Phone_number")]
-        public string PhoneNumber { get; set; }
+        public override string PhoneNumber { get; set; }
+
+        public override string Address => $"{this.Street} {this.BuildingNumber}";
+
+
         [JsonProperty("Post_code")]
         public string PostCode { get; set; }
         [JsonProperty("Street")]
@@ -16,19 +20,21 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
         public string BuildingNumber { get; set; }
         [JsonProperty("Holder")]
         public string Holder { get; set; }
-
-        // may need renaming after Bogdan change names in API
         [JsonProperty("E-mail")]
         public string Email { get; set; }
-
         [JsonProperty("Coordinates_(longitude)")]
         public string CoordinatesLongitude { get; set; }
-
         [JsonProperty("Coordinates_(latitude)")]
         public string CoordinatesLatitude { get; set; }
-
         [JsonProperty("Fax_number")]
         public string FaxNumber { get; set; }
+
+        public override string ToString()
+        {
+            return
+                $"{this?.Name}, {this.Address}, {this?.PostCode}, {this?.PhoneNumber}, {this?.Email}, Факс - {this?.FaxNumber}, {this?.Holder}"
+                    .Replace(", , ", ", ");
+        }
     }
 }
 

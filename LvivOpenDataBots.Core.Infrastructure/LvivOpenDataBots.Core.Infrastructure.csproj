@@ -88,15 +88,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ListStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="ReplyBuilders\Impelementations\GymnasiumReplyBuilder.cs" />
-    <Compile Include="ReplyBuilders\Impelementations\KinderGartenReplyBuilder.cs" />
-    <Compile Include="ReplyBuilders\IReplyBuilder.cs" />
-    <Compile Include="ReplyBuilders\Impelementations\PreSchoolReplyBuilder.cs" />
+    <Compile Include="ReplyBuilders\Impelementation\ReplyBuilder.cs" />
+    <Compile Include="ReplyBuilders\Contract\IReplyBuilder.cs" />
     <Compile Include="ReplyBuilders\ReplyBuilderFabric.cs" />
-    <Compile Include="ReplyBuilders\Impelementations\SchoolReplyBuilder.cs" />
-    <Compile Include="ReplyBuilders\Impelementations\TechLyceumReplyBuilder.cs" />
-    <Compile Include="ReplyBuilders\Impelementations\UniversityReplyBuilder.cs" />
     <Compile Include="TextAnalysis\EducationKeyWords.cs" />
     <Compile Include="TextAnalysis\TextAnalysis.cs" />
     <Compile Include="TextAnalysis\WordsToSkip.cs" />

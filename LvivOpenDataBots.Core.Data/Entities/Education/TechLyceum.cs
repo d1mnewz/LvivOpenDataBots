@@ -4,11 +4,21 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
     public class TechLyceum : BaseEntity
     {
-        [JsonProperty("Назва")]
+        [JsonProperty("Name")]
         public override string Name { get; set; }
 
-        [JsonProperty("Поштова адреса")]
-        public string PostAddress { get; set; }
+        [JsonProperty("Address")]
+        public override string Address { get; set; }
+
+        [JsonProperty("Phone")]
+        public override string PhoneNumber { get; set; }
+
+        public override string ToString()
+        {
+            return
+                $"{this?.Name}, {this?.Address}, {this?.PhoneNumber}"
+                    .Replace(", , ", ", "); // in case of nulls
+        }
     }
 }
 

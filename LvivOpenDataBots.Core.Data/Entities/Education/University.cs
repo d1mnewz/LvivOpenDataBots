@@ -4,14 +4,23 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
     public class University : BaseEntity
     {
-        [JsonProperty("Телефон")]
-        public string Phone { get; set; }
-        [JsonProperty("Назва")]
+        [JsonProperty("Phone_number")]
+        public override string PhoneNumber { get; set; }
+        [JsonProperty("Name")]
         public override string Name { get; set; }
-        [JsonProperty("Електронна адреса")]
+        [JsonProperty("address")]
+        public override string Address { get; set; }
+
+        [JsonProperty("Email")]
         public string Email { get; set; }
-        [JsonProperty("Поштова адреса")]
-        public string PostAddress { get; set; }
+
+
+        public override string ToString()
+        {
+            return
+                $"{this?.Name}, {this?.Address}, {this?.PhoneNumber}, {this?.Email}"
+                    .Replace(", , ", ", ");
+        }
     }
 }
 

@@ -2,7 +2,6 @@
 
 namespace LvivOpenDataBots.Core.Infrastructure.TextAnalysis
 {
-    // every key word should be lower case
     public static class EducationKeyWords
     {
         public static (string intent, List<string> synonims) Gymnasium = ("gymnasium", new List<string>
@@ -44,7 +43,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.TextAnalysis
             "львівська", "львівський",
             "національний", "національна",
             "університет", "університету",
-            "академія",
+            "академія", "українська",
             "інститут", "державний", "філія",
 
         });

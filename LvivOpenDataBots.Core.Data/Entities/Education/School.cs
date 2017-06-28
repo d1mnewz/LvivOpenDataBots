@@ -4,22 +4,34 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
     public class School : BaseEntity
     {
-        [JsonProperty("Адреса")]
-        public string Address { get; set; }
-        [JsonProperty("Назва")]
-        public override string  Name { get; set; }
-        [JsonProperty("тел.")]
-        public string PhoneNumber { get; set; }
-        [JsonProperty("пошта")]
-        public string Post { get; set; }
-        [JsonProperty("індекс")]
-        public string Index { get; set; }
-        [JsonProperty("Коордити (довгота)")]
-        public string CoordinatesLongtitude { get; set; }
-        [JsonProperty("Коордити (широта)")]
-        public string CoordinatesLatitude { get; set; }
-        [JsonProperty("Відповідальний орган")]
+        [JsonProperty("Name")]
+        public override string Name { get; set; }
+        [JsonProperty("Phone_number")]
+        public override string PhoneNumber { get; set; }
+        [JsonProperty("Post_code")]
+        public string PostCode { get; set; }
+        [JsonProperty("Street_name")]
+        public string StreetName { get; set; }
+        [JsonProperty("Building_number")]
+        public string BuildingNumber { get; set; }
+
+        public override string Address => $"{this.StreetName} {this.BuildingNumber}";
+
+        [JsonProperty("Holder")]
         public string Holder { get; set; }
+        [JsonProperty("Email")]
+        public string Email { get; set; }
+        [JsonProperty("Coordinates_(longitude)")]
+        public string CoordinatesLongitude { get; set; }
+        [JsonProperty("Coordinates_(latitude)")]
+        public string CoordinatesLatitude { get; set; }
+
+        public override string ToString()
+        {
+            return
+                $"{this?.Name}, {this.Address}, {this?.PostCode}, {this?.PhoneNumber}, {this?.Email}, {this?.Holder}"
+                    .Replace(", , ", ", ");
+        }
     }
 }
 

@@ -7,13 +7,16 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
         [JsonProperty("Name")]
         public override string Name { get; set; }
         [JsonProperty("Phone_number")]
-        public string PhoneNumber { get; set; }
+        public override string PhoneNumber { get; set; }
         [JsonProperty("Post_code")]
         public string PostCode { get; set; }
         [JsonProperty("Street_name")]
         public string StreetName { get; set; }
         [JsonProperty("Building_number")]
         public string BuildingNumber { get; set; }
+
+        public override string Address => $"{this.StreetName} {this.BuildingNumber}";
+
         [JsonProperty("Holder")]
         public string Holder { get; set; }
 
@@ -29,6 +32,13 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
 
         [JsonProperty("Web-site")]
         public string Website { get; set; }
+
+        public override string ToString()
+        {
+            return
+                $"{this?.Name}, {this.Address}, {this?.PostCode}, {this?.PhoneNumber}, {this?.Email}, {this?.Website}, {this?.Holder}"
+                    .Replace(", , ", ", ");
+        }
     }
 }
 
