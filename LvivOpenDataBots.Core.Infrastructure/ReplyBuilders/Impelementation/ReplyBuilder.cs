@@ -2,14 +2,12 @@
 using System.Linq;
 using System.Text;
 using LvivOpenDataBots.Core.Data.Entities;
-using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.Extensions;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Contract;
 using LvivOpenDataBots.Core.Infrastructure.TextAnalysis;
-using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.TextAnalysis;
-using static LvivOpenDataBots.Core.Infrastructure.Utils.WebJsonUtils;
+using LvivOpenDataBots.Core.Infrastructure.Utils;
 
-namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
+namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
 {
     public class ReplyBuilder<T> : IReplyBuilder<T>, IReplyBuilder where T : BaseEntity
     {
@@ -17,10 +15,10 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations
         {
             var lowerWordedMessage = message.ToLowerInvariant().ToWords()
                 .ExceptKeyWords<T>().Except(WordsToSkip.Prepositions).ToList();
-            var result = DefineMatchingEntity(
+            var result = TextAnalysis.TextAnalysis.DefineMatchingEntity(
                 lowerWordedMessage,
-                GetRecords<T>(
-                    DownloadJson<T>()
+                WebJsonUtils.GetRecords<T>(
+                    WebJsonUtils.DownloadJson<T>()
                 ));
 
             if (result == null)

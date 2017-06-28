@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Contract;
-using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementations;
+using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
 {
