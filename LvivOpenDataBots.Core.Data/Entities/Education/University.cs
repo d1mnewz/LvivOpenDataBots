@@ -2,7 +2,7 @@
 
 namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
-    public class University : BaseEntity
+    public class University : BaseEducationEntity
     {
         [JsonProperty("Phone_number")]
         public override string PhoneNumber { get; set; }

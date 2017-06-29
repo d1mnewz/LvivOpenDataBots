@@ -2,7 +2,7 @@
 
 namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
-    public class TechLyceum : BaseEntity
+    public class TechLyceum : BaseEducationEntity
     {
         [JsonProperty("Name")]
         public override string Name { get; set; }

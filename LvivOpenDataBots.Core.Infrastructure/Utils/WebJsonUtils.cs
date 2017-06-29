@@ -8,7 +8,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.Utils
 {
     public static class WebJsonUtils
     {
-        public static string DownloadJson<T>() where T : BaseEntity
+        public static string DownloadJson<T>() where T : BaseEducationEntity
         {
             var client = new WebClient();
             switch (typeof(T).Name)
@@ -29,7 +29,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.Utils
             return null;
         }
 
-        public static List<T> GetRecords<T>(string json) where T : BaseEntity
+        public static List<T> GetRecords<T>(string json) where T : BaseEducationEntity
         {
             var res = JObject.Parse(json);
             var jArray = (JArray)res["result"]["records"];

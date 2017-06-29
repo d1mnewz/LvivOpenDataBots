@@ -16,7 +16,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.Extensions
 
         }
 
-        public static IEnumerable<string> ExceptKeyWords<T>(this IList<string> source) where T : BaseEntity
+        public static IEnumerable<string> ExceptKeyWords<T>(this IList<string> source) where T : BaseEducationEntity
         {
             switch (typeof(T).Name)
             {

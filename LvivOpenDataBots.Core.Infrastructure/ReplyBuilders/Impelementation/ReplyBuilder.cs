@@ -9,12 +9,16 @@ using LvivOpenDataBots.Core.Infrastructure.Utils;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
 {
-    public class ReplyBuilder<T> : IReplyBuilder<T>, IReplyBuilder where T : BaseEntity
+    public class ReplyBuilder<T> : IReplyBuilder<T>, IReplyBuilder where T : BaseEducationEntity
     {
         public string BuildReply(List<string> intents, string message)
         {
             var lowerWordedMessage = message.ToLowerInvariant().ToWords()
                 .ExceptKeyWords<T>().Except(WordsToSkip.Prepositions).ToList();
+            if (lowerWordedMessage.Count < 2)
+            {
+
+            }
             var result = TextAnalysis.TextAnalysis.DefineMatchingEntity(
                 lowerWordedMessage,
                 WebJsonUtils.GetRecords<T>(
@@ -24,7 +28,8 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
             if (result == null)
                 return "На жаль, ми нічого не знайшли за цим запитом :(";
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
+
             if (!intents.Contains("address") &&
                 !intents.Contains("phone") &&
                 !intents.Contains("email"))

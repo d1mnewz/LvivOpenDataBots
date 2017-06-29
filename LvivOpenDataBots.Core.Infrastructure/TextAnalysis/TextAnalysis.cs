@@ -29,7 +29,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.TextAnalysis
         }
 
         [CanBeNull]
-        public static T DefineMatchingEntity<T>(IList<string> splitedMessage, IList<T> records) where T : BaseEntity
+        public static T DefineMatchingEntity<T>(IList<string> splitedMessage, IList<T> records) where T : BaseEducationEntity
         {
 
             var names = records.Select(x => x.Name);

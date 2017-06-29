@@ -2,7 +2,7 @@
 
 namespace LvivOpenDataBots.Core.Data.Entities
 {
-    public class BaseEntity
+    public class BaseEducationEntity
     {
         [JsonProperty("_id")]
         public string Id { get; set; }

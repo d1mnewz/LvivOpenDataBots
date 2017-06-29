@@ -9,7 +9,5 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Contract
     }
     public interface IReplyBuilder<T>
     {
-        string BuildReply(List<string> intents, string message);
-
     }
 }
