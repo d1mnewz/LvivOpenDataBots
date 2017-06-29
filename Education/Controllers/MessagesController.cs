@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Http;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
-using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation;
 using LvivOpenDataBots.Core.Infrastructure.Utils;
 using Microsoft.Bot.Connector;
 using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.TextAnalysis;
