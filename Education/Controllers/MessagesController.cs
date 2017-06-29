@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Http;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
+using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation;
 using Microsoft.Bot.Connector;
 using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.TextAnalysis;
 
@@ -23,8 +24,8 @@ namespace Education.Controllers
             {
                 var connector = new ConnectorClient(new Uri(uriString: activity.ServiceUrl));
                 var intents = GetIntentsList(activity: activity, aiKey: WebConfigurationManager.AppSettings["AiKey"]);
-                var replyText = "На жаль, ми нічого не знайшли за цим запитом :(" +
-                                " Спробуйте ввести точну назву закладу.";
+                var replyText = Errors.NotFound +
+                                Errors.NameNotSpecified;
                 Activity reply = activity.CreateReply(text: replyText);
 
                 #region HelpHeroCard

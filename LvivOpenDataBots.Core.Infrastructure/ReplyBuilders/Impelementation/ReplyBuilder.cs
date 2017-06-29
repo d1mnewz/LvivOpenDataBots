@@ -6,6 +6,7 @@ using LvivOpenDataBots.Core.Infrastructure.Extensions;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Contract;
 using LvivOpenDataBots.Core.Infrastructure.TextAnalysis;
 using LvivOpenDataBots.Core.Infrastructure.Utils;
+using static LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation.Errors;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
 {
@@ -15,9 +16,9 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
         {
             var lowerWordedMessage = message.ToLowerInvariant().ToWords()
                 .ExceptKeyWords<T>().Except(WordsToSkip.Prepositions).ToList();
-            if (lowerWordedMessage.Count < 2)
+            if (lowerWordedMessage.Count == 0)
             {
-
+                return NameNotSpecified;
             }
             var result = TextAnalysis.TextAnalysis.DefineMatchingEntity(
                 lowerWordedMessage,
@@ -26,7 +27,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
                 ));
 
             if (result == null)
-                return "На жаль, ми нічого не знайшли за цим запитом :(";
+                return NotFound;
 
             var sb = new StringBuilder();
 

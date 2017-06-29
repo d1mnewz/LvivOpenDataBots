@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Extensions\ListStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="ReplyBuilders\Impelementation\Errors.cs" />
     <Compile Include="ReplyBuilders\Impelementation\ReplyBuilder.cs" />
     <Compile Include="ReplyBuilders\Contract\IReplyBuilder.cs" />
     <Compile Include="ReplyBuilders\ReplyBuilderFabric.cs" />
