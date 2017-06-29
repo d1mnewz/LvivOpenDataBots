@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LvivOpenDataBots.Core.Data.Entities;
+using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.Extensions;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Contract;
 using LvivOpenDataBots.Core.Infrastructure.TextAnalysis;
 using LvivOpenDataBots.Core.Infrastructure.Utils;
-using static LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation.Errors;
+using static LvivOpenDataBots.Core.Infrastructure.Utils.Errors;
 
 namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
 {
-    public class ReplyBuilder<T> : IReplyBuilder<T>, IReplyBuilder where T : BaseEducationEntity
+    public class EducationReplyBuilder<T> : IReplyBuilder<T>, IReplyBuilder where T : BaseEducationEntity
     {
         public string BuildReply(List<string> intents, string message)
         {

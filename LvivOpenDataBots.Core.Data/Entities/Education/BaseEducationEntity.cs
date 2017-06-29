@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LvivOpenDataBots.Core.Data.Entities
+namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
     public class BaseEducationEntity
     {

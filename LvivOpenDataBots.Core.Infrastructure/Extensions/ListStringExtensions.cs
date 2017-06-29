@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LvivOpenDataBots.Core.Data.Entities;
+using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.TextAnalysis;
 using static System.Char;
 

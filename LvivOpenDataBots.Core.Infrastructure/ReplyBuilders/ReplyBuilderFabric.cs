@@ -15,27 +15,27 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders
                 return null;
             if (intents.Contains("kindergarten"))
             {
-                return new ReplyBuilder<KinderGarten>();
+                return new EducationReplyBuilder<KinderGarten>();
             }
             if (intents.Contains("gymnasium"))
             {
-                return new ReplyBuilder<Gymnasium>();
+                return new EducationReplyBuilder<Gymnasium>();
             }
             if (intents.Contains("university"))
             {
-                return new ReplyBuilder<University>();
+                return new EducationReplyBuilder<University>();
             }
             if (intents.Contains("techlyceum"))
             {
-                return new ReplyBuilder<TechLyceum>();
+                return new EducationReplyBuilder<TechLyceum>();
             }
             if (intents.Contains("preschool"))
             {
-                return new ReplyBuilder<PreSchool>();
+                return new EducationReplyBuilder<PreSchool>();
             }
             if (intents.Contains("school"))
             {
-                return new ReplyBuilder<School>();
+                return new EducationReplyBuilder<School>();
             }
 
             return null;

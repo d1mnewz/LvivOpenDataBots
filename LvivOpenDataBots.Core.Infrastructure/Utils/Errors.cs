@@ -1,4 +1,4 @@
-﻿namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
+﻿namespace LvivOpenDataBots.Core.Infrastructure.Utils
 {
     public static class Errors
     {

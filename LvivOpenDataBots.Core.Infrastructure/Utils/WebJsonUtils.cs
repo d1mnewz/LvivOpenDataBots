@@ -2,6 +2,7 @@
 using System.Net;
 using LvivOpenDataBots.Core.Data.DataPacks;
 using LvivOpenDataBots.Core.Data.Entities;
+using LvivOpenDataBots.Core.Data.Entities.Education;
 using Newtonsoft.Json.Linq;
 
 namespace LvivOpenDataBots.Core.Infrastructure.Utils

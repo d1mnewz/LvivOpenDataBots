@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using com.valgut.libs.bots.Wit;
 using JetBrains.Annotations;
-using LvivOpenDataBots.Core.Data.Entities;
+using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.Extensions;
 using Microsoft.Bot.Connector;
 

@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using System.Web.Http;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation;
+using LvivOpenDataBots.Core.Infrastructure.Utils;
 using Microsoft.Bot.Connector;
 using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.TextAnalysis;
 
@@ -28,16 +29,6 @@ namespace Education.Controllers
                                 Errors.NameNotSpecified;
                 Activity reply = activity.CreateReply(text: replyText);
 
-                #region HelpHeroCard
-                //if (intents.Contains("help")) // how to implement scoping without local storage?
-                //{
-                //    reply.Attachments = new List<Attachment> {
-                //        Utils.CreateHeroCardForEducation().ToAttachment()
-                //    };
-                //}
-                //else
-                //{
-                #endregion
 
                 if (intents.Count > 0)
                 {
