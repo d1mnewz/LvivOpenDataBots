@@ -39,11 +39,16 @@ namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
             }
             else if (intents.Contains("address"))
             {
-                sb.Append($"{result?.Name}, {result?.Address}");
+                if (result.Address != null)
+                    sb.Append($"{result.Name}, {result.Address}");
+                else return NoAddress;
+
             }
             else if (intents.Contains("phone"))
             {
-                sb.Append($"{result?.Name}, {result?.PhoneNumber}");
+                if (result.PhoneNumber != null)
+                    sb.Append($"{result.Name}, {result.PhoneNumber}");
+                else return NoPhoneNumber;
             }
             return sb.ToString();
         }
