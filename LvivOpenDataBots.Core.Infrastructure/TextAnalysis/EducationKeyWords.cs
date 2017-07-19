@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LvivOpenDataBots.Core.Infrastructure.TextAnalysis
 {
+    [Obsolete("maybe make a tool that checks whether there are duplicate words in name? current solution is crap. ")]
     public static class EducationKeyWords
     {
         public static (string intent, List<string> synonims) Gymnasium = ("gymnasium", new List<string>

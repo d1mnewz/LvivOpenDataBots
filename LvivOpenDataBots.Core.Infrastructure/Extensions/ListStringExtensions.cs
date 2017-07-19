@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LvivOpenDataBots.Core.Data.Entities;
+using JetBrains.Annotations;
 using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.TextAnalysis;
 using static System.Char;
@@ -10,6 +10,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.Extensions
 {
     public static class ListStringExtensions
     {
+        [ItemNotNull]
         public static IList<string> ToWords(this string source)
         {
             var punctuation = source.Where(IsPunctuation).Distinct().ToArray();
@@ -17,6 +18,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.Extensions
 
         }
 
+        [ItemNotNull]
         public static IEnumerable<string> ExceptKeyWords<T>(this IList<string> source) where T : BaseEducationEntity
         {
             switch (typeof(T).Name)

@@ -37,7 +37,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.TextAnalysis
             {
                 foreach (var wordOfMessage in splitedMessage)
                 {
-                    var result = name.GetFirstMatchAndSourceBack(wordOfMessage, StringComparison.OrdinalIgnoreCase);
+                    var result = name.GetFirstMatchAndSourceBack(wordOfMessage);
                     if (result.source != null && result.word != null)
                     {
                         return records.First(x => x.Name == result.source);

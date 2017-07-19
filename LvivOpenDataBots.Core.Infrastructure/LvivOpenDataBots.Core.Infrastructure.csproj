@@ -91,7 +91,7 @@
     <Compile Include="Extensions\ListStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Utils\Errors.cs" />
-    <Compile Include="ReplyBuilders\Impelementation\EducationReplyBuilder.cs" />
+    <Compile Include="ReplyBuilders\Implementation\EducationReplyBuilder.cs" />
     <Compile Include="ReplyBuilders\Contract\IReplyBuilder.cs" />
     <Compile Include="ReplyBuilders\ReplyBuilderFabric.cs" />
     <Compile Include="TextAnalysis\EducationKeyWords.cs" />

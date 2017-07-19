@@ -1,32 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using LvivOpenDataBots.Core.Data.Entities.Education;
 using LvivOpenDataBots.Core.Infrastructure.Extensions;
 using LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Contract;
-using LvivOpenDataBots.Core.Infrastructure.TextAnalysis;
-using LvivOpenDataBots.Core.Infrastructure.Utils;
+using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.TextAnalysis;
+using static LvivOpenDataBots.Core.Infrastructure.TextAnalysis.WordsToSkip;
 using static LvivOpenDataBots.Core.Infrastructure.Utils.Errors;
+using static LvivOpenDataBots.Core.Infrastructure.Utils.WebJsonUtils;
 
-namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Impelementation
+namespace LvivOpenDataBots.Core.Infrastructure.ReplyBuilders.Implementation
 {
     public class EducationReplyBuilder<T> : IReplyBuilder<T>, IReplyBuilder where T : BaseEducationEntity
     {
-        public string BuildReply(List<string> intents, string message)
+        public async Task<string> BuildReplyAsync(List<string> intents, string message)
         {
             var lowerWordedMessage = message.ToLowerInvariant().ToWords()
-                .ExceptKeyWords<T>().Except(WordsToSkip.Prepositions).ToList();
-            if (lowerWordedMessage.Count == 0)
+                .ExceptKeyWords<T>().Except(Prepositions).ToList();
+            if (lowerWordedMessage.Count is 0)
             {
                 return NameNotSpecified;
             }
-            var result = TextAnalysis.TextAnalysis.DefineMatchingEntity(
+            var result = DefineMatchingEntity(
                 lowerWordedMessage,
-                WebJsonUtils.GetRecords<T>(
-                    WebJsonUtils.DownloadJson<T>()
+                GetRecords<T>(
+                    DownloadJson<T>()
                 ));
 
-            if (result == null)
+            if (result is null)
                 return NotFound;
 
             var sb = new StringBuilder();

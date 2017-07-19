@@ -33,7 +33,7 @@ namespace Education.Controllers
                 {
                     var rbFabric = new ReplyBuilderFabric();
 
-                    replyText = rbFabric.GetBuilder(intents)?.BuildReply(intents: intents, message: activity.Text);
+                    replyText = await rbFabric.GetBuilder(intents).BuildReplyAsync(intents: intents, message: activity.Text).ConfigureAwait(false);
                     reply = activity.CreateReply(text: replyText);
                 }
                 await connector.Conversations.ReplyToActivityAsync(activity: reply);
