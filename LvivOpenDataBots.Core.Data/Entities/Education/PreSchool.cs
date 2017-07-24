@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using Newtonsoft.Json;
 
 namespace LvivOpenDataBots.Core.Data.Entities.Education
 {
@@ -31,9 +32,21 @@ namespace LvivOpenDataBots.Core.Data.Entities.Education
 
         public override string ToString()
         {
-            return
-                $"{this?.Name}, {this.Address}, {this?.PostCode}, {this?.PhoneNumber}, {this?.Email}, Факс - {this?.FaxNumber}, {this?.Holder}"
-                    .Replace(", , ", ", ");
+            var sb = new StringBuilder();
+            sb.Append($"{this.Name}, {this.Address}");
+            if (!string.IsNullOrWhiteSpace(PostCode))
+                sb.Append($", {this.PostCode}");
+            if (!string.IsNullOrWhiteSpace(PhoneNumber))
+                sb.Append($", тел.{this.PhoneNumber}");
+            if (!string.IsNullOrWhiteSpace(Email))
+                sb.Append($", {this.Email}");
+            if (!string.IsNullOrWhiteSpace(FaxNumber))
+                sb.Append($", Факс - {this.FaxNumber}");
+            if (!string.IsNullOrWhiteSpace(Holder))
+                sb.Append($", {this.Holder}");
+            sb.Append(".");
+
+            return sb.ToString();
         }
     }
 }
