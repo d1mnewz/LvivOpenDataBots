@@ -14,7 +14,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.Extensions
         public static IList<string> ToWords(this string source)
         {
             var punctuation = source.Where(IsPunctuation).Distinct().ToArray();
-            return source.Split().Select(x => x.Trim(punctuation)).Where(x => x != "").ToList();
+            return source.Split().Select(x => x.Trim(punctuation)).Where(x => x != "").Select(x => x.Replace("№", "")).ToList();
 
         }
 
