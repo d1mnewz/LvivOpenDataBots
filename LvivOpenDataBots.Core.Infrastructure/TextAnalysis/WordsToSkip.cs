@@ -6,7 +6,7 @@ namespace LvivOpenDataBots.Core.Infrastructure.TextAnalysis
     {
         public static readonly List<string> Prepositions = new List<string>
         {
-            "при", "ім.", "ім", "для", "із", "з", "імені", "та", "і",
+            "при", "ім.", "ім", "для", "із", "з", "імені", "та", "і", "№"
         };
     }
 }
